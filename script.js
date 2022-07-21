@@ -65,7 +65,7 @@ class graphNode {
             dummyNode.highlighted=true;
             //Iterate throgh all the other nodes
             for(let i=0;i<graphList.length;i++){
-                //Check that the node is not the same as the current one and that it not a neighbor of the current one
+                //Check that the node is not the same as the current one and that it not a neighbor of the current one and that it is in the same set
                 if(graphList[i].name!=nodeCircle.id & dummyNode.adjacencyList.indexOf(graphList[i])==-1 & document.getElementById(graphList[i].name).getAttribute('fill')==nodeCircle.getAttribute('fill')){
                     //Check that the node is highlighted
                 if(graphList[i].highlighted==true){
@@ -96,33 +96,39 @@ class graphNode {
                     nodeCircle.setAttribute('stroke-width','0');
                     document.getElementById(graphList[i].name).setAttribute('stroke-width','0')
 
-
+//iterate through the edgelist
                     for(let a=0;a<edgeList.length;a++){
-                        
+                        //get the x and y coordinates of the line
                         let x1=edgeList[a].getAttribute("x1");
                         let x2=edgeList[a].getAttribute("x2");
                         let y1=edgeList[a].getAttribute("y1");
                         let y2=edgeList[a].getAttribute("y2");
-
+//iterate through the remaining element in the edgelist
                         for(let b=a+1;b<edgeList.length;b++){
+                            //check that the lines are not the in the same set
                             if(edgeList[a].getAttribute("stroke")!=edgeList[b].getAttribute("stroke")){
+                                //get the x and y coordinates of the line
                             let x3=edgeList[b].getAttribute("x1");
                             let x4=edgeList[b].getAttribute("x2");
                             let y3=edgeList[b].getAttribute("y1");
                             let y4=edgeList[b].getAttribute("y2");
+                            //get the slopes
                             let m1;
                             let m2;
                             if(y2>y1) m1=(y2-y1)/(x2-x1)
                             else m1=(y1-y2)/(x1-x2)
                             if(y4>y3) m2=(y4-y3)/(x4-x3)
                             else m2=(y3-y4)/(x3-x4)
+                            //get the intercepts
                             let b1=y1-m1*x1;
                             let b2=y3-m2*x3;
+                            //get the intersection point
                             let tempX=(b2-b1)/(m1-m2)
                             let tempY=m1*tempX+b1;
+                            //check that it is a valid point on both lines
                             if(!((tempX<x3&&tempX<x4)||(tempX>x3&&tempX>x4)||((tempX<x1&&tempX<x2)||(tempX>x1&&tempX>x2)))){
                                 if(!((tempY<y3&&tempY<y4)||(tempY>y3&&tempY>y4)||(tempY<y1&&tempY<y2)||(tempY>y1&&tempY>y2))){
-
+//create a circle svg element
         const intersection=document.createElementNS("http://www.w3.org/2000/svg", "circle");
         // Give it a radius, color, position, and an id
             intersection.setAttribute('r','10')
@@ -196,7 +202,7 @@ else color='red';
         edgeList=[];
         //reset the counter
         counter=0;
-        //Add the g element as the first element in svg which will contain the edges 
+        //Add the g elements in the order that the elements inside of them will be displayed 
         let redEdges=document.createElementNS("http://www.w3.org/2000/svg","g")
         redEdges.setAttribute("class","redEdges")
         document.querySelector('svg').appendChild(redEdges)
