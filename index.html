@@ -1,0 +1,46 @@
+<!-- Ali Sbeih - 7/20/22 - Segment Intersections Project -->
+
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- The character set to be used -->
+<meta charset="utf-8">
+<!-- The title of the page -->
+<title>Segment Intersections</title>
+<!-- Link the css file -->
+<link rel="stylesheet" href="style.css"/>
+<!-- Link the script file -->
+<script src="script.js" defer></script>
+    </head>
+
+    <body>
+        <!-- The controls section that will take the left half of the screen -->
+        <div id="controls">
+
+            <!-- Heading -->
+        <h1>Segment Intersections</h1>
+        <!-- Paragraph -->
+        <p>Go back to the <a href="https://alis25.github.io/Ali-Sbeih-Index/">index page</a></p>
+        <p>Create your initial set of segments by clicking to create a circle and highlighting two circles to connect them</p>
+        <!-- Paragraph containing a button -->
+        <p><button id="switch">Switch Set</button></p>
+        <!-- Paragraph containing a button-->
+        <p><button id="reset">Reset Graph Panel</button></p>
+
+</div>
+
+<!-- SVG element that will contain all the other SVG elements created in the JavaScript file for visualizing the graphs -->
+        <svg width="50%" height="100%"id='main'>
+            <!-- This element is used to assign properties to a complete set of elements. In this case edges will always be drawn first 
+                to make the circles go on top -->
+            <g class="redEdges"></g>
+            <g class="redCircles"></g>
+            <g class="intersections"></g>
+            <g class="greenEdges"></g>
+          
+
+        </svg>
+    </body>
+</html>
